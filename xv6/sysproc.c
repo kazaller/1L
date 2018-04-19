@@ -14,9 +14,9 @@ sys_fork(void)
 }
 
 int
-sys_exit(int status)
+sys_exit(int status) // CS 153
 {
-  exit(status);
+  exit(status); // CS 153
   return 0;  // not reached
 }
 
