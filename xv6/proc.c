@@ -246,7 +246,9 @@ exit(int status) // CS 153
   iput(curproc->cwd);
   end_op();
   curproc->cwd = 0;
-
+  
+  curproc->exitstatus = status; // CS 153
+  
   acquire(&ptable.lock);
 
   // Parent might be sleeping in wait().
