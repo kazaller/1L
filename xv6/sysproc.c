@@ -22,7 +22,7 @@ sys_exit(int status) // CS 153
 }
 
 int
-sys_wait(void)
+sys_wait(int *status)
 {
   return wait();
 }
