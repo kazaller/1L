@@ -247,7 +247,7 @@ exit(int status) // CS 153
   end_op();
   curproc->cwd = 0;
   
-  exitstatus = status;
+  curproc->exitstatus = status;
   
   acquire(&ptable.lock);
 
