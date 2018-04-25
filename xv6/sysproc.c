@@ -25,7 +25,7 @@ int
 sys_wait(int *status) // CS 153
 {
   argptr(0, (char**)&status, 1); // CS 153
-  return wait(status); // CS 153
+  return wait(&status); // CS 153
 }
 
 int
