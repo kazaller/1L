@@ -58,6 +58,8 @@ void
 runcmd(struct cmd *cmd)
 {
   int p[2];
+  int exit_status; // CS 153
+
   struct backcmd *bcmd;
   struct execcmd *ecmd;
   struct listcmd *lcmd;
@@ -93,7 +95,7 @@ runcmd(struct cmd *cmd)
     lcmd = (struct listcmd*)cmd;
     if(fork1() == 0)
       runcmd(lcmd->left);
-    wait();
+    wait(&exit_status); // CS 153
     runcmd(lcmd->right);
     break;
 
@@ -117,8 +119,8 @@ runcmd(struct cmd *cmd)
     }
     close(p[0]);
     close(p[1]);
-    wait();
-    wait();
+    wait(&exit_status); // CS 153
+    wait(&exit_status); // CS 153
     break;
 
   case BACK:
@@ -145,6 +147,8 @@ int
 main(void)
 {
   static char buf[100];
+  int exit_status; // CS 153
+
   int fd;
 
   // Ensure that three file descriptors are open.
@@ -166,7 +170,7 @@ main(void)
     }
     if(fork1() == 0)
       runcmd(parsecmd(buf));
-    wait();
+    wait(&exit_status); // CS 153
   }
   exit(0); // CS 153
 }
