@@ -24,6 +24,7 @@ sys_exit(int status) // CS 153
 int
 sys_wait(int *status) // CS 153
 {
+  //argptr(1, ...) CS153
   return wait();
 }
 
