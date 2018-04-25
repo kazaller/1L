@@ -16,7 +16,7 @@ sys_fork(void)
 int
 sys_exit(int status) // CS 153
 {
-  argint(0, &status); // CS 153
+  argint(0, (&status); // CS 153
   exit(status); // CS 153
   return 0;  // not reached
 }
@@ -24,7 +24,7 @@ sys_exit(int status) // CS 153
 int
 sys_wait(int *status) // CS 153
 {
-  argptr(0, &status, 1); // CS 153
+  argptr(0, (char)&status, 1); // CS 153
   return wait(status); // CS 153
 }
 
