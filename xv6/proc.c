@@ -313,6 +313,8 @@ wait(int* status) // CS 153
   }
 }
 
+//int waitpid(int pid, int *status, int options) CS153
+
 //PAGEBREAK: 42
 // Per-CPU process scheduler.
 // Each CPU calls scheduler() after setting itself up.
