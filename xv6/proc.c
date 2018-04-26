@@ -297,6 +297,9 @@ wait(int* status) // CS 153 // probably need to do something with status in here
         p->name[0] = 0;
         p->killed = 0;
         p->state = UNUSED;
+        
+        status = p->exitstatus; // CS 153
+        
         release(&ptable.lock);
         return pid;
       }
@@ -338,6 +341,9 @@ waitpid(int pid, int* status, int options) // CS 153
         p->name[0] = 0;
         p->killed = 0;
         p->state = UNUSED;
+        
+        status = p->exitstatus; // CS 153
+        
         release(&ptable.lock);
         return pid;
       }
