@@ -330,7 +330,6 @@ waitpid(int pid, int* status, int options) // CS 153
       processExists = 1;
       if(p->state == ZOMBIE){
         // Found it, it exited.
-        pid = p->pid;
         kfree(p->kstack);
         p->kstack = 0;
         freevm(p->pgdir);
