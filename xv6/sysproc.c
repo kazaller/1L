@@ -17,7 +17,7 @@ int
 sys_exit(void)
 {
   int status; // CS 153
-  argint(0, &status) // CS 153
+  argint(0, &status); // CS 153
   exit(status); // CS 153
   return 0;  // not reached
 }
@@ -26,7 +26,7 @@ int
 sys_wait(void)
 {
   int *status; // CS 153
-  argptr(0, (char**)&status, 1) // CS 153
+  argptr(0, (char**)&status, 1); // CS 153
   return wait(status); // CS 153
 }
 
@@ -40,7 +40,7 @@ sys_waitpid(void) // CS 153 // probably need to work on this function more
   if(argint(0, &pid) < 0) // CS 153
     return -1; // CS 153
   
-  argptr(1, (char**)&status, 1) // CS 153
+  argptr(1, (char**)&status, 1); // CS 153
   
   if (argint(2, &options) < 0) // CS 153
     return -1; // CS 153
