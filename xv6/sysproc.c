@@ -26,11 +26,26 @@ sys_exit(void)
 int
 sys_wait(void)
 {
-  int *status;
+  int *status; // CS 153
   if (argptr(0, (char**)&status, 1) < 0) // CS 153
     return -1; // CS 153
   return wait(status); // CS 153
 }
+
+int // CS 153
+sys_waitpid(void) // CS 153 // probably need to work on this function more
+{ // CS 153
+  int *status; // CS 153
+  int pid; // CS 153
+  
+  if(argint(0, &pid) < 0) // CS 153
+    return -1; // CS 153
+  
+  if (argptr(0, (char**)&status, 1) < 0) // CS 153
+    return -1; // CS 153
+  
+  return waitpid(pid, status, 0); // CS 153
+} // CS 153
 
 int
 sys_kill(void)
