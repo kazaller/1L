@@ -14,19 +14,38 @@ sys_fork(void)
 }
 
 int
-sys_exit(int status) // CS 153
+sys_exit(void)
 {
-  argint(0, &status); // CS 153
+  int status; // CS 153
+  if (argint(0, &status) < 0) // CS 153
+    return -1; // CS 153
   exit(status); // CS 153
   return 0;  // not reached
 }
 
 int
-sys_wait(int *status) // CS 153
+sys_wait(void)
 {
-  argptr(0, (char**)&status, 1); // CS 153
+  int *status; // CS 153
+  if (argptr(0, (char**)&status, 1) < 0) // CS 153
+    return -1; // CS 153
   return wait(status); // CS 153
 }
+
+int // CS 153
+sys_waitpid(void) // CS 153 // probably need to work on this function more
+{ // CS 153
+  int *status; // CS 153
+  int pid; // CS 153
+  
+  if(argint(0, &pid) < 0) // CS 153
+    return -1; // CS 153
+  
+  if (argptr(0, (char**)&status, 1) < 0) // CS 153
+    return -1; // CS 153
+  
+  return waitpid(pid, status, 0); // CS 153
+} // CS 153
 
 int
 sys_kill(void)
