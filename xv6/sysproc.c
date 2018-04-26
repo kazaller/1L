@@ -24,7 +24,7 @@ sys_exit(void)
 }
 
 int
-sys_wait(void) // CS 153
+sys_wait(void)
 {
   int *status;
   if (argptr(0, (char**)&status, 1) < 0) // CS 153
