@@ -11,6 +11,8 @@ int
 main(void)
 {
   int pid, wpid;
+  int exit_status; // CS 153
+
 
   if(open("console", O_RDWR) < 0){
     mknod("console", 1, 1);
@@ -31,7 +33,7 @@ main(void)
       printf(1, "init: exec sh failed\n");
       exit(1); // CS 153
     }
-    while((wpid=wait()) >= 0 && wpid != pid)
+    while((wpid=wait(&exit_status)) >= 0 && wpid != pid) // CS 153
       printf(1, "zombie!\n");
   }
 }
