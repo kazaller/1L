@@ -297,6 +297,9 @@ wait(int* status) // CS 153 // probably need to do something with status in here
         p->name[0] = 0;
         p->killed = 0;
         p->state = UNUSED;
+        
+        //status = (int*)(p->exitstatus); // CS 153
+        
         release(&ptable.lock);
         return pid;
       }
@@ -317,20 +320,19 @@ int // CS 153 .........................finish this..............................
 waitpid(int pid, int* status, int options) // CS 153
 {
   struct proc *p;
-  int havekids;
+  int processExists;
   struct proc *curproc = myproc();
   
   acquire(&ptable.lock);
   for(;;){
     // Scan through table looking for exited children.
-    havekids = 0;
+    processExists = 0;
     for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
-      if(p->parent != curproc)
+      if(p->pid != pid)
         continue;
-      havekids = 1;
+      processExists = 1;
       if(p->state == ZOMBIE){
-        // Found one.
-        pid = p->pid;
+        // Found it, it exited.
         kfree(p->kstack);
         p->kstack = 0;
         freevm(p->pgdir);
@@ -339,18 +341,21 @@ waitpid(int pid, int* status, int options) // CS 153
         p->name[0] = 0;
         p->killed = 0;
         p->state = UNUSED;
+        
+        //status = (int*)(p->exitstatus); // CS 153
+        
         release(&ptable.lock);
         return pid;
       }
     }
 
-    // No point waiting if we don't have any children.
-    if(!havekids || curproc->killed){
+    // No point waiting if the process doesn't exist
+    if(!processExists || curproc->killed){
       release(&ptable.lock);
       return -1;
     }
 
-    // Wait for children to exit.  (See wakeup1 call in proc_exit.)
+    // Wait for process with pid to exit.  (See wakeup1 call in proc_exit.)
     sleep(curproc, &ptable.lock);  //DOC: wait-sleep
   }
 } // CS 153 ......................................................................................................................
