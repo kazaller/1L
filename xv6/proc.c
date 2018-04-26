@@ -317,7 +317,7 @@ int // CS 153 .........................finish this..............................
 waitpid(int pid, int* status, int options) // CS 153
 {
   struct proc *p;
-  int havekids, pid;
+  int havekids;
   struct proc *curproc = myproc();
   
   acquire(&ptable.lock);
