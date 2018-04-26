@@ -48,7 +48,7 @@ sys_waitpid(void) // CS 153 // probably need to work on this function more
   if (argint(2, &options) < 0) // CS 153
     return -1; // CS 153
   
-  return waitpid(pid, status, 0); // CS 153
+  return waitpid(pid, status, options); // CS 153
 } // CS 153
 
 int
