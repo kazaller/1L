@@ -342,7 +342,7 @@ waitpid(int pid, int* status, int options) // CS 153
         p->killed = 0;
         p->state = UNUSED;
         
-        //status = (int*)(p->exitstatus); // CS 153
+        *status = p->exitstatus; // CS 153
         
         release(&ptable.lock);
         return pid;
