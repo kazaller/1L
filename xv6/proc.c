@@ -379,24 +379,26 @@ waitpid(int pid, int* status, int options) // CS 153
 
 
 int
-priority_change(int pc, int* priority)
+setPriority(int pc)
 {
   // do something here
   // lowest priority = 0 // max priority = 31
   int lowest = 0; // lowest priority
   int highest = 31; // highest priority
   
-  if (priority + pc < lowest)
+  struct proc *curproc = myproc();
+  
+  if (pc < lowest)
   {
-    priority = lowest;
+    curproc->priority = lowest;
   }
-  else if (priority + pc > highest)
+  else if (pc > highest)
   {
-    priority = highest;
+    curproc->priority = highest;
   }
   else
   {
-    priority = priority + pc;
+    curproc->priority = pc;
   }
   
   return 0;
