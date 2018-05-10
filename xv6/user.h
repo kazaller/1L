@@ -6,7 +6,7 @@ int fork(void);
 int exit(int) __attribute__((noreturn)); // CS 153
 int wait(int*); // CS 153
 int waitpid(int, int*, int); // CS 153
-void priority_change(int); // CS 153
+int priority_change(int); // CS 153
 int pipe(int*);
 int write(int, void*, int);
 int read(int, void*, int);
