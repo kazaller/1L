@@ -88,6 +88,7 @@ allocproc(void)
 found:
   p->state = EMBRYO;
   p->pid = nextpid++;
+  p->priority = 0; // CS 153
 
   release(&ptable.lock);
 
@@ -377,6 +378,30 @@ waitpid(int pid, int* status, int options) // CS 153
 
 
 
+int
+priority_change(int pc, int* priority)
+{
+  // do something here
+  // lowest priority = 0 // max priority = 31
+  int lowest = 0; // lowest priority
+  int highest = 31; // highest priority
+  
+  if (priority + pc < lowest)
+  {
+    priority = lowest;
+  }
+  else if (priority + pc > highest)
+  {
+    priority = highest;
+  }
+  else
+  {
+    priority = priority + pc;
+  }
+  
+  return 0;
+}
+
 //PAGEBREAK: 42
 // Per-CPU process scheduler.
 // Each CPU calls scheduler() after setting itself up.
@@ -389,10 +414,10 @@ void
 scheduler(void)
 {
   struct proc *p;
-  struct proc * tp; //CS 153; holds process with highest priority
+  //struct proc * tp; //CS 153; holds process with highest priority
   struct cpu *c = mycpu();
   c->proc = 0;
-  bool first = true;
+  //bool first = true;
   
   for(;;){
     // Enable interrupts on this processor.
