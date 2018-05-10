@@ -298,7 +298,7 @@ wait(int* status) // CS 153 // probably need to do something with status in here
         p->killed = 0;
         p->state = UNUSED;
         
-        if (status != NULL)
+        if (status)
         {
         *status = p->exitstatus; // CS 153
         }
@@ -324,6 +324,10 @@ waitpid(int pid, int* status, int options) // CS 153
   struct proc *p;
   int processExists;
   struct proc *curproc = myproc();
+  if (curproc->pid == pid)
+  {
+    return -1;
+  }
   
   acquire(&ptable.lock);
   for(;;){
@@ -344,7 +348,10 @@ waitpid(int pid, int* status, int options) // CS 153
         p->killed = 0;
         p->state = UNUSED;
         
+        if(status)
+        {
         *status = p->exitstatus; // CS 153
+        }
         
         release(&ptable.lock);
         return pid;
@@ -352,7 +359,7 @@ waitpid(int pid, int* status, int options) // CS 153
     }
 
     // No point waiting if the process doesn't exist or the process is itself
-    if(!processExists || curproc->killed || (curproc->pid == pid)){
+    if(!processExists || curproc->killed ){
       release(&ptable.lock);
       return -1;
     }
