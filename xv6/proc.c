@@ -397,10 +397,10 @@ void
 scheduler(void)
 {
   struct proc *p;
-  struct proc * tp; //CS 153; holds process with highest priority
+  //struct proc * tp; //CS 153; holds process with highest priority
   struct cpu *c = mycpu();
   c->proc = 0;
-  bool first = true;
+  //bool first = true;
   
   for(;;){
     // Enable interrupts on this processor.
