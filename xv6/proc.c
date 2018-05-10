@@ -379,7 +379,7 @@ waitpid(int pid, int* status, int options) // CS 153
 
 
 int
-priority_change(int pc)
+priority_change(int pc, int* priority)
 {
   // do something here
   return 0;
