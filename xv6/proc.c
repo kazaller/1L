@@ -369,6 +369,13 @@ waitpid(int pid, int* status, int options) // CS 153
   }
 } // CS 153 ......................................................................................................................
 
+//CS 153
+//void priority_change(int pc) {
+//  currproc -> priority = pc;
+//  return;
+//}
+
+
 
 //PAGEBREAK: 42
 // Per-CPU process scheduler.
