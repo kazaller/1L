@@ -111,7 +111,7 @@ int             kill(int);
 struct cpu*     mycpu(void);
 struct proc*    myproc();
 void            pinit(void);
-void            priority_change(int); // CS 153
+int             priority_change(int); // CS 153
 void            procdump(void);
 void            scheduler(void) __attribute__((noreturn));
 void            sched(void);
