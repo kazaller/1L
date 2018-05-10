@@ -375,7 +375,7 @@ int
 priority_change(int pc)
 {
   // do something here
-  return 1;
+  return 0;
 }
 
 //PAGEBREAK: 42
