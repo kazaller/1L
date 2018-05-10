@@ -370,6 +370,13 @@ waitpid(int pid, int* status, int options) // CS 153
   }
 } // CS 153 ......................................................................................................................
 
+//CS 153.............................................................................................................................
+//void priority_change(int pc) {
+//  currproc -> priority = pc;
+//  return;
+//} //CS 153.........................................................................................................................
+
+
 
 int
 priority_change(int pc)
@@ -390,18 +397,33 @@ void
 scheduler(void)
 {
   struct proc *p;
+  struct proc * tp; //CS 153; holds process with highest priority
   struct cpu *c = mycpu();
   c->proc = 0;
+  bool first = true;
   
   for(;;){
     // Enable interrupts on this processor.
     sti();
-
+    //first = true; //CS 153
     // Loop over process table looking for process to run.
     acquire(&ptable.lock);
     for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
+      
       if(p->state != RUNNABLE)
         continue;
+      /* CS 153
+      if (first) 
+      {
+        tp = p;
+        first = false;
+      }
+      
+      if (tp->priority < p->priority)
+      {
+        tp = p;
+      }
+      */
 
       // Switch to chosen process.  It is the process's job
       // to release ptable.lock and then reacquire it
