@@ -96,7 +96,7 @@ extern int sys_mkdir(void);
 extern int sys_mknod(void);
 extern int sys_open(void);
 extern int sys_pipe(void);
-extern int sys_priority_change(void); // CS 153
+extern int sys_setPriority(void); // CS 153
 extern int sys_read(void);
 extern int sys_sbrk(void);
 extern int sys_sleep(void);
@@ -129,7 +129,7 @@ static int (*syscalls[])(void) = {
 [SYS_mkdir]   sys_mkdir,
 [SYS_close]   sys_close,
 [SYS_waitpid] sys_waitpid, // CS 153
-[SYS_priority_change] sys_priority_change, // CS 153
+[SYS_priority_change] sys_setPriority, // CS 153
 };
 
 void
