@@ -52,12 +52,14 @@ int //CS 153
 sys_priority_change(void) // CS 153 // finish
 {
   int pc;
+  int *priority; // CS 153
   if (argint(0, &pc) < 0) // CS 153
   {
     return -1; // CS 153
   }
+  argptr(1, (char**)&priority, 1); // CS 153
   
-  return priority_change(pc); // CS 153
+  return priority_change(pc, priority); // CS 153
 }
 
 int
