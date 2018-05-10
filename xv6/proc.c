@@ -382,6 +382,23 @@ int
 priority_change(int pc, int* priority)
 {
   // do something here
+  // lowest priority = 0 // max priority = 31
+  int lowest = 0; // lowest priority
+  int highest = 31; // highest priority
+  
+  if (priority + pc < lowest)
+  {
+    priority = lowest;
+  }
+  else if (priority + pc > highest)
+  {
+    priority = highest;
+  }
+  else
+  {
+    priority = priority + pc;
+  }
+  
   return 0;
 }
 
