@@ -49,7 +49,7 @@ sys_waitpid(void) // CS 153 // probably need to work on this function more
 } // CS 153
 
 int //CS 153
-sys_priority_change(void) // CS 153 // finish
+sys_setPriority(void) // CS 153 // finish
 {
   int pc;
   int *priority; // CS 153
