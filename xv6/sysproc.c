@@ -57,9 +57,8 @@ sys_setPriority(void) // CS 153 // finish
   {
     return -1; // CS 153
   }
-  argptr(1, (char**)&priority, 1); // CS 153
   
-  return priority_change(pc, priority); // CS 153
+  return priority_change(pc); // CS 153
 }
 
 int
