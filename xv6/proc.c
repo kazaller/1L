@@ -371,11 +371,11 @@ waitpid(int pid, int* status, int options) // CS 153
 } // CS 153 ......................................................................................................................
 
 
-void
+int
 priority_change(int pc)
 {
   // do something here
-  return;
+  return 1;
 }
 
 //PAGEBREAK: 42
