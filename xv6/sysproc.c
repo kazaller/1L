@@ -48,7 +48,7 @@ sys_waitpid(void) // CS 153 // probably need to work on this function more
   return waitpid(pid, status, options); // CS 153
 } // CS 153
 
-void //CS 153
+int //CS 153
 sys_priority_change(void) // CS 153 // finish
 {
   int pc;
