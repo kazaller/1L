@@ -416,7 +416,7 @@ void
 scheduler(void)
 {
   struct proc *p;
-  //struct proc * tp; //CS 153; holds process with highest priority
+  struct proc * tp; //CS 153; holds process with highest priority
   struct cpu *c = mycpu();
   c->proc = 0;
   //bool first = true;
@@ -427,23 +427,31 @@ scheduler(void)
     //first = true; //CS 153
     // Loop over process table looking for process to run.
     acquire(&ptable.lock);
-    for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
+    
+    int first = 1;
+    
+    for(p = ptable.proc; p < &ptable.proc[NPROC]; p++)
+    {
       
       if(p->state != RUNNABLE)
         continue;
-      /* CS 153
-      if (first) 
-      {
-        tp = p;
-        first = false;
-      }
       
-      if (tp->priority < p->priority)
+      // will find the process with the highest priority // CS 153 ........
+      if (first)
       {
         tp = p;
       }
-      */
-
+      else if (tp->priority < p->priority)
+      {
+        tp->priority++;
+        tp = p;
+      }
+      else
+      {
+        p->priority++;
+      }
+      ......................................................................
+      /*
       // Switch to chosen process.  It is the process's job
       // to release ptable.lock and then reacquire it
       // before jumping back to us.
@@ -457,7 +465,24 @@ scheduler(void)
       // Process is done running for now.
       // It should have changed its p->state before coming back.
       c->proc = 0;
+      */
     }
+    
+      // Switch to chosen process.  It is the process's job
+      // to release ptable.lock and then reacquire it
+      // before jumping back to us.
+    
+      c->proc = tp;
+      switchuvm(tp);
+      tp->state = RUNNING;
+
+      swtch(&(c->scheduler), tp->context);
+      switchkvm();
+
+      // Process is done running for now.
+      // It should have changed its tp->state before coming back.
+      c->proc = 0;
+    
     release(&ptable.lock);
 
   }
