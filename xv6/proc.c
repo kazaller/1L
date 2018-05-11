@@ -445,16 +445,12 @@ scheduler(void)
       }
       else if (tp->priority > p->priority)
       {
-        if (tp->priority > 0)
-          tp->priority--;
-        
+        tp->priority--;
         tp = p;
       }
       else
       {
-        if (p->priority > 0)
-          p->priority--;
-        
+        p->priority--;
       }
       //......................................................................
       /*
@@ -479,8 +475,7 @@ scheduler(void)
       // before jumping back to us.
     if (!first)
     {
-      if (tp->priority < 31)
-        tp->priority++;
+      tp->priority++;
       
       
       c->proc = tp;
