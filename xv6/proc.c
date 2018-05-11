@@ -447,7 +447,7 @@ scheduler(void)
       {
         if (p->priority > 0)
         {
-        tp->priority--;
+          tp->priority--;
         }
         tp = p;
       }
@@ -455,7 +455,7 @@ scheduler(void)
       {
         if (p->priority > 0)
         {
-        p->priority--;
+          p->priority--;
         }
       }
       //......................................................................
