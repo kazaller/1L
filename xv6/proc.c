@@ -416,7 +416,6 @@ void
 scheduler(void)
 {
   struct proc *p;
-  struct proc * tp; //CS 153; holds process with highest priority
   struct cpu *c = mycpu();
   c->proc = 0;
   //bool first = true;
@@ -428,7 +427,9 @@ scheduler(void)
     // Loop over process table looking for process to run.
     acquire(&ptable.lock);
     
-    int first = 1;
+    int first = 1; // CS 153
+    
+    struct proc * tp; //CS 153; holds process with highest priority
     
     for(p = ptable.proc; p < &ptable.proc[NPROC]; p++)
     {
