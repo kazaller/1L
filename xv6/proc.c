@@ -444,11 +444,8 @@ scheduler(void)
         first = 0;
       }
       else if (tp->priority > p->priority)
-      {
-        if (tp->priority > 0)
-        {
-          tp->priority--;
-        }
+      {        
+        tp->priority--;
         tp = p;
       }
       else
