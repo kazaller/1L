@@ -441,6 +441,7 @@ scheduler(void)
       if (first)
       {
         tp = p;
+        first = 0;
       }
       else if (tp->priority < p->priority)
       {
