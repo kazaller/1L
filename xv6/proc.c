@@ -473,7 +473,8 @@ scheduler(void)
       // Switch to chosen process.  It is the process's job
       // to release ptable.lock and then reacquire it
       // before jumping back to us.
-    
+    if (!first)
+    {
       c->proc = tp;
       switchuvm(tp);
       tp->state = RUNNING;
@@ -484,7 +485,7 @@ scheduler(void)
       // Process is done running for now.
       // It should have changed its tp->state before coming back.
       c->proc = 0;
-    
+    }
     release(&ptable.lock);
 
   }
