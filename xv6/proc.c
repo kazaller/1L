@@ -476,8 +476,10 @@ scheduler(void)
     if (!first)
     {
       
-      tp->priority++;
-      
+      if (tp->priority < 31)
+      {
+        tp->priority++;
+      }
       c->proc = tp;
       switchuvm(tp);
       tp->state = RUNNING;
