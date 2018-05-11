@@ -159,6 +159,7 @@ mkfs: mkfs.c fs.h
 .PRECIOUS: %.o
 
 # CS 153 - added _lab1_test, lab2.c\ to UPROGS
+
 UPROGS=\
 	_cat\
 	_echo\
@@ -244,6 +245,7 @@ qemu-nox-gdb: fs.img xv6.img .gdbinit
 # check in that version.
 
 # CS 153 - added lab1_test.c, lab2.c to EXTRA
+
 EXTRA=\
 	mkfs.c ulib.c user.h cat.c echo.c forktest.c grep.c kill.c lab1_test.c lab2.c\
 	ln.c ls.c mkdir.c rm.c stressfs.c usertests.c wc.c zombie.c\
