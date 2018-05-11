@@ -29,16 +29,16 @@ int main(int argc, char *argv[])
 	if (pid > 0 ) {
 		continue;}
 	else if ( pid == 0) {
-		printf(1, "\n Hello! this is child# %d and I will change my priority to %d \n",getpid(),2*i);
-		setPriority(2*i);	
+		printf(1, "\n Hello! this is child# %d and I will change my priority to %d \n",getpid(),2*i + 5);
+		setPriority(2*i + 5);	
 		for (j=0;j<50000;j++) {
 			for(k=0;k<10000;k++) {
 				asm("nop"); }}
-		printf(1, "\n child# %d with starting priority %d has finished first loop! \n",getpid(),2*i);
+		printf(1, "\n child# %d with starting priority %d has finished first loop! \n",getpid(),2*i + 5);
 		for (j=0;j<50000;j++) {
 			for(k=0;k<10000;k++) {
 				asm("nop"); }}
-		printf(1, "\n child# %d with starting priority %d has finished both loops! \n",getpid(),2*i);
+		printf(1, "\n child# %d with starting priority %d has finished both loops! \n",getpid(),2*i + 5);
 		exit(0);
         }
         else {
