@@ -88,7 +88,7 @@ allocproc(void)
 found:
   p->state = EMBRYO;
   p->pid = nextpid++;
-  p->priority = 0; // CS 153
+  p->priority = 10; // CS 153
 
   release(&ptable.lock);
 
@@ -383,8 +383,8 @@ setPriority(int pc)
 {
   // do something here
   // lowest priority = 0 // max priority = 31
-  int lowest = 0; // lowest priority
-  int highest = 31; // highest priority
+  int lowest = 0; // lowest priority // but is really the highest
+  int highest = 31; // highest priority // but is really the lowest
   
   struct proc *curproc = myproc();
   
@@ -443,14 +443,14 @@ scheduler(void)
         tp = p;
         first = 0;
       }
-      else if (tp->priority < p->priority)
+      else if (tp->priority > p->priority)
       {
-        tp->priority++;
+        tp->priority--;
         tp = p;
       }
       else
       {
-        p->priority++;
+        p->priority--;
       }
       //......................................................................
       /*
@@ -475,6 +475,7 @@ scheduler(void)
       // before jumping back to us.
     if (!first)
     {
+      tp->priority++;
       c->proc = tp;
       switchuvm(tp);
       tp->state = RUNNING;
