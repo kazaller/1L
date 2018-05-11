@@ -29,12 +29,16 @@ int main(int argc, char *argv[])
 	if (pid > 0 ) {
 		continue;}
 	else if ( pid == 0) {
-//		printf(1, "\n Hello! this is child# %d and I will change my priority to %d \n",getpid(),60-20*i);
-		setPriority(30-10*i);	
+		printf(1, "\n Hello! this is child# %d and I will change my priority to %d \n",getpid(),2*i);
+		setPriority(2*i);	
 		for (j=0;j<50000;j++) {
 			for(k=0;k<10000;k++) {
 				asm("nop"); }}
-		printf(1, "\n child# %d with priority %d has finished! \n",getpid(),30-10*i);		
+		printf(1, "\n child# %d with starting priority %d has finished first loop! \n",getpid(),2*i);
+		for (j=0;j<50000;j++) {
+			for(k=0;k<10000;k++) {
+				asm("nop"); }}
+		printf(1, "\n child# %d with starting priority %d has finished both loops! \n",getpid(),2*i);
 		exit(0);
         }
         else {
@@ -48,7 +52,7 @@ int main(int argc, char *argv[])
 			ret_pid = wait(&exit_status);
 			printf(1,"\n This is the parent: child with PID# %d has finished with status %d \n",ret_pid,exit_status);
 			}
-                     printf(1,"\n if processes with highest priority finished first then its correct \n");
+                     printf(1,"\n If child with lower priority finishes one loop before child with highest priority finishes both, aging works. Of course, child with highest priority should finish first. \n");
 }
 			
 	return 0;}
