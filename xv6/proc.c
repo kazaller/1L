@@ -450,7 +450,7 @@ scheduler(void)
       }
       else
       {
-        if (p->priority > 0)
+        if (p->priority)
         {
           p->priority--;
         }
