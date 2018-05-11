@@ -445,7 +445,7 @@ scheduler(void)
       }
       else if (tp->priority > p->priority)
       {
-        if (p->priority > 0)
+        if (tp->priority > 0)
         {
           tp->priority--;
         }
@@ -481,8 +481,10 @@ scheduler(void)
       // before jumping back to us.
     if (!first)
     {
-      
-      tp->priority++;
+      if (tp->priority < 31)
+      {
+        tp->priority++;
+      }
       
       c->proc = tp;
       switchuvm(tp);
